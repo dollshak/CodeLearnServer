@@ -24,16 +24,17 @@ const getSession = async (req,res) => {
 }
 
 const addSession = async (req,res) => {
+    console.log("add session", req.body)
     try{
         const session = new Session({
             uuid: uuidv4(),
-            userId: req.body.userId,
-            codeBlockId: req.body.codeBlockId,
+            userId: req.body.data.userId,
+            codeBlockId: req.body.data.codeBlockId,
         });
         await session.save()
         .then(data=> {console.log('success')})
         .catch(err => console.log(err));
-        res.json(Session);
+        res.json(session);
     }
     catch(error){
         console.log(error)

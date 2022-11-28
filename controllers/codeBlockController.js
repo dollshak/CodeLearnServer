@@ -3,12 +3,6 @@ const CodeBlock = require("../models/CodeBlock");
 
 const getAllCodeBlocks = async (req, res) => {
     try{
-        const title = req.query.title
-        console.log(title)
-        if (title){
-            console.log(shone)
-            getCodeBlock(title)
-        }
         const codeBlocks = await CodeBlock.find();
         res.json(codeBlocks);
     }
@@ -20,7 +14,7 @@ const getAllCodeBlocks = async (req, res) => {
 const getCodeBlock = async (req,res) => {
     console.log("get one code block")
     try{
-        const codeBlock = await CodeBlock.find({title: req.params.title});
+        const codeBlock = await CodeBlock.find({_id: req.params.id});
         res.json(codeBlock);
     }
     catch(error){

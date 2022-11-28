@@ -33,7 +33,7 @@ const getMentor = async (req,res) => {
 
 const getStudent = async (req,res) => {
     try{
-        const student = await 'student1';
+        const student = await student.find(); //TODO
         res.json(student);
     }
     catch(error){
