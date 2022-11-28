@@ -5,9 +5,11 @@ const codeBlockRoutes = require('./routs/codeBlockRouts')
 const sessionRoutes = require('./routs/sessionRouts')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 const port = process.env.PORT || 5000;
 

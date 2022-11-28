@@ -3,6 +3,12 @@ const CodeBlock = require("../models/CodeBlock");
 
 const getAllCodeBlocks = async (req, res) => {
     try{
+        const title = req.query.title
+        console.log(title)
+        if (title){
+            console.log(shone)
+            getCodeBlock(title)
+        }
         const codeBlocks = await CodeBlock.find();
         res.json(codeBlocks);
     }
@@ -12,8 +18,9 @@ const getAllCodeBlocks = async (req, res) => {
 }
 
 const getCodeBlock = async (req,res) => {
+    console.log("get one code block")
     try{
-        const codeBlock = await CodeBlocks.find({name: "student"});
+        const codeBlock = await CodeBlock.find({title: req.params.title});
         res.json(codeBlock);
     }
     catch(error){
@@ -24,8 +31,8 @@ const getCodeBlock = async (req,res) => {
 const addCodeBlock = async (req,res) => {
     try{
         const codeBlock = new CodeBlock({
-            title: 'codeBlock1',
-            code: 'if true print(1)'
+            title: req.body.title,
+            code: req.body.code,
         });
         await codeBlock.save()
         .then(data=> {console.log('success')})

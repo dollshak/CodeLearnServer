@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const Session = require("../models/Session");
 
 const getAllSessions = async (req, res) => {
+    console.log("get all sessions")
     try{
         const sessions = await Session.find();
         res.json(sessions);
@@ -12,6 +13,7 @@ const getAllSessions = async (req, res) => {
 }
 
 const getSession = async (req,res) => {
+    console.log("get one session")
     try{
         const session = await Session.find({uuid: req.params.uuid});
         res.json(session);
