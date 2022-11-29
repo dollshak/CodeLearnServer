@@ -59,10 +59,27 @@ const addStudent = async (req,res) => {
     }
 }
 
+const validateLogin = async (req,res) => {
+    try{
+        console.log(req.body.data.username)
+        const user = await User.find({username: req.body.data.username, password: req.body.data.password});
+        console.log("user is",user)
+        res.json(user);
+
+    }
+    catch(error){
+        console.log(error)
+        res.status(400).json(error);
+    }
+}
+
+
+
 module.exports = {
     getAllUsers,
     getAllStudents,
     getMentor,
     getStudent,
     addStudent,
+    validateLogin,
 };

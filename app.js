@@ -54,15 +54,6 @@ io.on("connection", (socket) => {
         console.log("data from client", data);
         socket.to(data.sessionUuid).emit("receive_updated_code", data)
     })
-
-
-    // socket.on("send_message", (data) => {
-    //     socket.broadcast.emit("receive_message", data)
-    // });
-
-    // socket.on("join_room", (data) => {
-    //     socket.join(data);
-    // })
 });
 
 
