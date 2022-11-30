@@ -28,13 +28,27 @@ const addStudent = async (req,res) => {
             password: req?.body?.password,
             role: 'student'
         });
-        await student.save()
-        .then(data=> {})
-        .catch(err => console.log(err));
+        await student.save();
         res.json(student);
     }
     catch(error){
         console.log("add student got error:",error)
+        res.status(400).json(error);
+    }
+}
+
+const addMentor = async (req,res) => {
+    try{
+        const mentor = new User({
+            username: req?.body?.username,
+            password: req?.body?.password,
+            role: 'mentor'
+        });
+        await mentor.save();
+        res.json(mentor);
+    }
+    catch(error){
+        console.log("add mentor got error:",error)
         res.status(400).json(error);
     }
 }
@@ -56,5 +70,6 @@ module.exports = {
     getAllUsers,
     getAllStudents,
     addStudent,
+    addMentor,
     validateLogin,
 };
