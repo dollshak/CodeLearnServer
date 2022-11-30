@@ -1,16 +1,17 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const usersRouts = require('./routs/userRouts');
 const codeBlockRoutes = require('./routs/codeBlockRouts')
 const sessionRoutes = require('./routs/sessionRouts')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const cors = require('cors')
 const http = require("http")
 const {Server} = require("socket.io")
 const server = http.createServer(app)
 const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'});
+
 const io = new Server(server, {
     cors: {
         origin: process.env.CLIENT_URL,
