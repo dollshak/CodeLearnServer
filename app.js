@@ -22,12 +22,12 @@ app.use(cors());
 
 const port = process.env.PORT || 5000;
 
-const uri = 'mongodb+srv://Shaked:123@codelearn.uqobdhi.mongodb.net/?retryWrites=true&w=majority'
-// app.listen(port, () => console.log('server started'));
-
 server.listen(port, () => {
-    console.log("listening")
+    console.log("server started")
 })
+
+const uri = 'mongodb+srv://Shaked:123@codelearn.uqobdhi.mongodb.net/?retryWrites=true&w=majority'
+
 async function connect(){
     try {
         await mongoose.connect(uri)
@@ -40,10 +40,12 @@ async function connect(){
 
 connect()
 
+//define routs
 app.use('/users', usersRouts);
 app.use('/codeBlock', codeBlockRoutes)
 app.use('/session', sessionRoutes)
 
+//define socket details
 io.on("connection", (socket) => {
     console.log(`user connected: ${socket.id}`);
 

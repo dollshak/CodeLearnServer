@@ -1,7 +1,7 @@
 const { find } = require("../models/User");
 const User = require("../models/User");
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (_req, res) => {
     try{
         const users = await User.find();
         res.json(users);
@@ -11,7 +11,7 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-const getAllStudents = async (req,res) => {
+const getAllStudents = async (_req,res) => {
     try{
         const students = await User.find({role: "student"});
         res.json(students);
@@ -21,54 +21,31 @@ const getAllStudents = async (req,res) => {
     }
 }
 
-const getMentor = async (req,res) => {
-    try{
-        const mentor = await User.find({role: "mentor"});
-        res.json(mentor);
-    }
-    catch(error){
-        res.status(400).json({message: 'could not get mentor'});
-    }
-}
-
-const getStudent = async (req,res) => {
-    try{
-        const student = await student.find(); //TODO
-        res.json(student);
-    }
-    catch(error){
-        res.status(400).json({message: 'could not get student'});
-    }
-}
-
 const addStudent = async (req,res) => {
     try{
         const student = new User({
-            username: 'gal',
-            password: '123',
-            role: 'mentor'
+            username: req?.body?.username,
+            password: req?.body?.password,
+            role: 'student'
         });
         await student.save()
-        .then(data=> {console.log('success')})
+        .then(data=> {})
         .catch(err => console.log(err));
         res.json(student);
     }
     catch(error){
-        console.log(error)
+        console.log("add student got error:",error)
         res.status(400).json(error);
     }
 }
 
 const validateLogin = async (req,res) => {
     try{
-        console.log(req.body.data.username)
-        const user = await User.find({username: req.body.data.username, password: req.body.data.password});
-        console.log("user is",user)
+        const user = await User.find({username: req?.body?.data?.username, password: req?.body?.data?.password});
         res.json(user);
-
     }
     catch(error){
-        console.log(error)
+        console.log("validate login got error:", error)
         res.status(400).json(error);
     }
 }
@@ -78,8 +55,6 @@ const validateLogin = async (req,res) => {
 module.exports = {
     getAllUsers,
     getAllStudents,
-    getMentor,
-    getStudent,
     addStudent,
     validateLogin,
 };

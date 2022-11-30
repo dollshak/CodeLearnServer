@@ -1,7 +1,7 @@
 const { find } = require("../models/User");
 const CodeBlock = require("../models/CodeBlock");
 
-const getAllCodeBlocks = async (req, res) => {
+const getAllCodeBlocks = async (_req, res) => {
     try{
         const codeBlocks = await CodeBlock.find();
         res.json(codeBlocks);
@@ -12,9 +12,8 @@ const getAllCodeBlocks = async (req, res) => {
 }
 
 const getCodeBlock = async (req,res) => {
-    console.log("get one code block")
     try{
-        const codeBlock = await CodeBlock.find({_id: req.params.id});
+        const codeBlock = await CodeBlock.find({_id: req?.params?.id});
         res.json(codeBlock);
     }
     catch(error){
@@ -25,8 +24,8 @@ const getCodeBlock = async (req,res) => {
 const addCodeBlock = async (req,res) => {
     try{
         const codeBlock = new CodeBlock({
-            title: req.body.title,
-            code: req.body.code,
+            title: req?.body?.title,
+            code: req?.body?.code,
         });
         await codeBlock.save()
         .then(data=> {console.log('success')})
@@ -34,7 +33,7 @@ const addCodeBlock = async (req,res) => {
         res.json(codeBlock);
     }
     catch(error){
-        console.log(error)
+        console.log("could not add codeBlock")
         res.status(400).json(error);
     }
 }
