@@ -9,24 +9,27 @@ const cors = require('cors')
 const http = require("http")
 const {Server} = require("socket.io")
 const server = http.createServer(app)
+const dotenv = require('dotenv');
+dotenv.config({path: 'config.env'});
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: process.env.CLIENT_URL,
         methods: ["GET", "POST"],
     },
 });
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 server.listen(port, () => {
-    console.log("server started")
+    console.log("server started on port", port)
 })
 
-const uri = 'mongodb+srv://Shaked:123@codelearn.uqobdhi.mongodb.net/?retryWrites=true&w=majority'
+const uri = process.env.DB_CONNECTION;
 
 async function connect(){
     try {
@@ -38,12 +41,12 @@ async function connect(){
     }
 }
 
-connect()
+connect();
 
 //define routs
 app.use('/users', usersRouts);
-app.use('/codeBlock', codeBlockRoutes)
-app.use('/session', sessionRoutes)
+app.use('/codeBlock', codeBlockRoutes);
+app.use('/session', sessionRoutes);
 
 //define socket details
 io.on("connection", (socket) => {

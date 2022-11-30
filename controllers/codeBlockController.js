@@ -28,8 +28,6 @@ const addCodeBlock = async (req,res) => {
             code: req?.body?.code,
         });
         await codeBlock.save()
-        .then(data=> {console.log('success')})
-        .catch(err => console.log(err));
         res.json(codeBlock);
     }
     catch(error){
