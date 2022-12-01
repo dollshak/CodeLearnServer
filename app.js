@@ -32,15 +32,15 @@ server.listen(port, () => {
 
 const uri = process.env.DB_CONNECTION;
 
-async function connect(){
-    try {
-        await mongoose.connect(uri)
-        console.log("connected to mongoDB");
-    }
-    catch(error){
-        console.error(error);
-    }
-}
+// async function connect(){
+//     try {
+//         await mongoose.connect(uri)
+//         console.log("connected to mongoDB");
+//     }
+//     catch(error){
+//         console.error(error);
+//     }
+// }
 
 connect();
 
