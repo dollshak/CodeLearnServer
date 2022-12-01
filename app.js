@@ -10,7 +10,7 @@ const http = require("http")
 const {Server} = require("socket.io")
 const server = http.createServer(app)
 const dotenv = require('dotenv');
-dotenv.config({path: 'config.env'});
+// dotenv.config({path: 'config.env'});
 
 // const io = new Server(server, {
 //     cors: {
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 
 server.listen(port, () => {
     console.log("server started on port", port)
