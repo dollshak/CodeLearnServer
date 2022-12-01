@@ -42,7 +42,7 @@ const uri = process.env.DB_CONNECTION;
 //     }
 // }
 
-connect();
+// connect();
 
 //define routs
 app.use('/users', usersRouts);
