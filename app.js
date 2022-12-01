@@ -55,17 +55,17 @@ app.use('/codeBlock', codeBlockRoutes);
 app.use('/session', sessionRoutes);
 
 // define socket details
-// io.on("connection", (socket) => {
-//     console.log(`user connected: ${socket.id}`);
+io.on("connection", (socket) => {
+    console.log(`user connected: ${socket.id}`);
 
-//     socket.on("join_session", (data) => {
-//         socket.join(data);
-//     });
-//     socket.on("update_code", (data) => {
-//         console.log("data from client", data);
-//         socket.to(data.sessionUuid).emit("receive_updated_code", data)
-//     })
-// });
+    socket.on("join_session", (data) => {
+        socket.join(data);
+    });
+    socket.on("update_code", (data) => {
+        console.log("data from client", data);
+        socket.to(data.sessionUuid).emit("receive_updated_code", data)
+    })
+});
 
 
 
