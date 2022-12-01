@@ -24,8 +24,8 @@ const getAllStudents = async (_req,res) => {
 const addStudent = async (req,res) => {
     try{
         const student = new User({
-            username: req?.body?.username,
-            password: req?.body?.password,
+            username: req.body.username,
+            password: req.body.password,
             role: 'student'
         });
         await student.save();
