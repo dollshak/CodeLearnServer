@@ -13,7 +13,7 @@ const getAllSessions = async (_req, res) => {
 
 const getSession = async (req,res) => {
     try{
-        const session = await Session.find({uuid: req?.params?.uuid});
+        const session = await Session.find({uuid: req.params.uuid});
         res.json(session);
     }
     catch(error){
@@ -25,8 +25,8 @@ const addSession = async (req,res) => {
     try{
         const session = new Session({
             uuid: uuidv4(),
-            userId: req?.body?.data?.userId,
-            codeBlockId: req?.body?.data?.codeBlockId,
+            userId: req.body.data.userId,
+            codeBlockId: req.body.data.codeBlockId,
         });
         await session.save();
         res.json(session);

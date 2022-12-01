@@ -13,7 +13,7 @@ const getAllCodeBlocks = async (_req, res) => {
 
 const getCodeBlock = async (req,res) => {
     try{
-        const codeBlock = await CodeBlock.find({_id: req?.params?.id});
+        const codeBlock = await CodeBlock.find({_id: req.params.id});
         res.json(codeBlock);
     }
     catch(error){
@@ -24,8 +24,8 @@ const getCodeBlock = async (req,res) => {
 const addCodeBlock = async (req,res) => {
     try{
         const codeBlock = new CodeBlock({
-            title: req?.body?.title,
-            code: req?.body?.code,
+            title: req.body.title,
+            code: req.body.code,
         });
         await codeBlock.save()
         res.json(codeBlock);

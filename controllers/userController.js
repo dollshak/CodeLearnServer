@@ -40,8 +40,8 @@ const addStudent = async (req,res) => {
 const addMentor = async (req,res) => {
     try{
         const mentor = new User({
-            username: req?.body?.username,
-            password: req?.body?.password,
+            username: req.body.username,
+            password: req.body.password,
             role: 'mentor'
         });
         await mentor.save();
@@ -55,7 +55,7 @@ const addMentor = async (req,res) => {
 
 const validateLogin = async (req,res) => {
     try{
-        const user = await User.find({username: req?.body?.data?.username, password: req?.body?.data?.password});
+        const user = await User.find({username: req.body.data.username, password: req.body.data.password});
         res.json(user);
     }
     catch(error){
