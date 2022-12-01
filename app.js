@@ -49,7 +49,7 @@ app.use('/users', usersRouts);
 app.use('/codeBlock', codeBlockRoutes);
 app.use('/session', sessionRoutes);
 
-//define socket details
+// define socket details
 // io.on("connection", (socket) => {
 //     console.log(`user connected: ${socket.id}`);
 
