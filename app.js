@@ -10,14 +10,14 @@ const http = require("http")
 const {Server} = require("socket.io")
 const server = http.createServer(app)
 const dotenv = require('dotenv');
-// dotenv.config({path: 'config.env'});
+dotenv.config({path: 'config.env'});
 
-// const io = new Server(server, {
-//     cors: {
-//         origin: process.env.CLIENT_URL,
-//         methods: ["GET", "POST"],
-//     },
-// });
+const io = new Server(server, {
+    cors: {
+        origin: process.env.CLIENT_URL,
+        methods: ["GET", "POST"],
+    },
+});
 
 
 app.use(express.json());
@@ -32,10 +32,10 @@ try{
     })
 }
 catch(err){
-    console.log("error");
+    console.log("error:", err);
 }
 
-const uri = process.env.DB_CONNECTION;
+// const uri = process.env.DB_CONNECTION;
 
 // async function connect(){
 //     try {
