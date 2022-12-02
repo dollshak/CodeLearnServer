@@ -55,11 +55,6 @@ const addMentor = async (req,res) => {
 
 const validateLogin = async (req,res) => {
     try{
-        // const user = {
-        //     username: "mentor",
-        //     password: "123",
-        //     role: 'mentor'
-        // }
         const user = await User.find({username: req.body.data.username, password: req.body.data.password});
         res.json(user);
     }

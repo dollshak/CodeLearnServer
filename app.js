@@ -12,24 +12,22 @@ const server = http.createServer(app)
 const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'});
 
-try{
-    const io = new Server(server, {
-        cors: {
-            origin: process.env.CLIENT_URL,
-            methods: ["GET", "POST"],
-        },
-    });
-}
-catch(err){
-    console.log(err);
-}
+const io = new Server(server, {
+    cors: {
+        origin: process.env.PRODUCTION === 'true' ? process.env.CLIENT_URL_PROD : process.env.LOCAL_CLIENT_URL,
+        methods: ["GET", "POST"],
+    },
+});
+
+console.log(process.env.PORT_PROD === 4000)
+console.log(process.env.PORT_PROD === '4000')
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const port = process.env.PORT || 4000;
+const port = process.env.PRODUCTION === 'true' ? process.env.PORT_PROD : process.env.LOCAL_PORT;
 
 try{
     server.listen(port, () => {
@@ -59,18 +57,18 @@ app.use('/users', usersRouts);
 app.use('/codeBlock', codeBlockRoutes);
 app.use('/session', sessionRoutes);
 
-// // define socket details
-// io.on("connection", (socket) => {
-//     console.log(`user connected: ${socket.id}`);
+// define socket details
+io.on("connection", (socket) => {
+    console.log(`user connected: ${socket.id}`);
 
-//     socket.on("join_session", (data) => {
-//         socket.join(data);
-//     });
-//     socket.on("update_code", (data) => {
-//         console.log("data from client", data);
-//         socket.to(data.sessionUuid).emit("receive_updated_code", data)
-//     })
-// });
+    socket.on("join_session", (data) => {
+        socket.join(data);
+    });
+    socket.on("update_code", (data) => {
+        console.log("data from client", data);
+        socket.to(data.sessionUuid).emit("receive_updated_code", data)
+    })
+});
 
 
 
