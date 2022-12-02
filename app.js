@@ -12,12 +12,17 @@ const server = http.createServer(app)
 const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'});
 
-const io = new Server(server, {
-    cors: {
-        origin: process.env.CLIENT_URL,
-        methods: ["GET", "POST"],
-    },
-});
+try{
+    const io = new Server(server, {
+        cors: {
+            origin: process.env.CLIENT_URL,
+            methods: ["GET", "POST"],
+        },
+    });
+}
+catch(err){
+    console.log(err);
+}
 
 
 app.use(express.json());
