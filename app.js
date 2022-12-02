@@ -14,13 +14,10 @@ dotenv.config({path: 'config.env'});
 
 const io = new Server(server, {
     cors: {
-        origin: process.env.PRODUCTION === 'true' ? process.env.CLIENT_URL_PROD : process.env.LOCAL_CLIENT_URL,
+        origin: "*",
         methods: ["GET", "POST"],
     },
 });
-
-console.log(process.env.PORT_PROD === 4000)
-console.log(process.env.PORT_PROD === '4000')
 
 
 app.use(express.json());
