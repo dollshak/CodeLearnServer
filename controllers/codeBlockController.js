@@ -1,4 +1,3 @@
-const { find } = require("../models/User");
 const CodeBlock = require("../models/CodeBlock");
 
 const getAllCodeBlocks = async (_req, res) => {
@@ -22,10 +21,14 @@ const getCodeBlock = async (req,res) => {
 }
 
 const addCodeBlock = async (req,res) => {
+    console.log("hi");
+    console.log("sol",req.body.solution);
+    console.log(req.body.title);
     try{
         const codeBlock = new CodeBlock({
             title: req.body.title,
             code: req.body.code,
+            solution: req.body.solution,
         });
         await codeBlock.save()
         res.json(codeBlock);
