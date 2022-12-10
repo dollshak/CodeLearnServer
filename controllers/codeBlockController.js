@@ -21,9 +21,6 @@ const getCodeBlock = async (req,res) => {
 }
 
 const addCodeBlock = async (req,res) => {
-    console.log("hi");
-    console.log("sol",req.body.solution);
-    console.log(req.body.title);
     try{
         const codeBlock = new CodeBlock({
             title: req.body.title,
